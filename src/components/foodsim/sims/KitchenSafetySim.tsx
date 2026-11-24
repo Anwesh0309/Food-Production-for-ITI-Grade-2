@@ -48,18 +48,18 @@ export function KitchenSafetySim() {
         <FoodStat label={L('Correct', 'सही')} value={score} color={T.accent2} />
       </div>
 
-      <div className="rounded-xl border p-3.5 sm:p-4 flex items-start gap-3 bg-red-50/60 dark:bg-red-950/20 border-red-200 dark:border-red-900/40">
-        <span className="grid place-items-center w-9 h-9 rounded-xl flex-shrink-0 bg-red-100 dark:bg-red-900/50 text-red-600 dark:text-red-300"><Siren size={18} /></span>
-        <p className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100 mt-1 leading-snug">{L(s.en, s.hi)}</p>
+      <div className="rounded-xl border p-3.5 sm:p-4 flex items-start gap-3.5 bg-red-50/60 dark:bg-red-950/20 border-red-200 dark:border-red-900/40">
+        <span className="grid place-items-center w-11 h-11 rounded-xl flex-shrink-0 bg-red-100 dark:bg-red-900/50 text-red-600 dark:text-red-300"><Siren size={22} /></span>
+        <p className="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 mt-1 leading-snug">{L(s.en, s.hi)}</p>
       </div>
 
-      <div className="grid gap-2">
+      <div className="grid gap-2 sm:gap-2.5">
         {s.options.map((o, i) => {
           const isCorrect = pick !== null && i === s.correct;
           const isWrong = pick === i && i !== s.correct;
           return (
             <button key={i} onClick={() => choose(i)} disabled={pick !== null}
-              className={`text-left text-xs sm:text-sm px-3.5 py-3 rounded-xl border flex items-center justify-between gap-2.5 transition-all shadow-2xs ${
+              className={`text-left text-sm sm:text-base px-4 py-3.5 rounded-xl border flex items-center justify-between gap-3 transition-all shadow-2xs min-h-[50px] ${
                 isCorrect
                   ? 'border-green-500 bg-green-50 dark:bg-green-950/30 text-green-700 dark:text-green-300 font-bold'
                   : isWrong
@@ -69,15 +69,15 @@ export function KitchenSafetySim() {
                   : 'bg-white dark:bg-surface-dark-2 border-slate-200 dark:border-slate-700 hover:border-red-400 text-slate-800 dark:text-slate-200 cursor-pointer'
               }`}>
               <span className="flex-1">{L(o.en, o.hi)}</span>
-              {isCorrect && <CheckCircle2 size={16} className="text-green-600 dark:text-green-400 flex-shrink-0" />}
-              {isWrong && <X size={16} className="text-red-600 dark:text-red-400 flex-shrink-0" />}
+              {isCorrect && <CheckCircle2 size={18} className="text-green-600 dark:text-green-400 flex-shrink-0" />}
+              {isWrong && <X size={18} className="text-red-600 dark:text-red-400 flex-shrink-0" />}
             </button>
           );
         })}
       </div>
 
       {pick !== null && (
-        <div className={`rounded-xl p-3.5 text-xs sm:text-sm leading-relaxed border ${
+        <div className={`rounded-xl p-3.5 sm:p-4 text-sm sm:text-base leading-relaxed border ${
           pick === s.correct
             ? 'bg-green-50 dark:bg-green-950/30 border-green-200 dark:border-green-800/40 text-green-800 dark:text-green-200'
             : 'bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800/40 text-amber-800 dark:text-amber-200'
@@ -87,17 +87,17 @@ export function KitchenSafetySim() {
       )}
 
       {pick !== null && (allDone ? (
-        <div className="rounded-xl p-3 text-sm font-medium flex items-center gap-2" style={{ background: '#16a34a1a', color: '#15803d' }}>
-          <CheckCircle2 size={18} /> {L(`Finished — ${score}/${SCN.length} correct. Knowing the right first action keeps a small kitchen accident from becoming a serious injury.`,
+        <div className="rounded-xl p-3.5 sm:p-4 text-sm sm:text-base font-semibold flex items-center gap-2.5" style={{ background: '#16a34a1a', color: '#15803d' }}>
+          <CheckCircle2 size={20} className="flex-shrink-0" /> {L(`Finished — ${score}/${SCN.length} correct. Knowing the right first action keeps a small kitchen accident from becoming a serious injury.`,
             `समाप्त — ${score}/${SCN.length} सही। सही पहली क्रिया छोटी दुर्घटना को गंभीर चोट बनने से रोकती है।`)}
         </div>
       ) : (
-        <button onClick={next} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold text-white" style={{ background: T.accent }}>
-          {L('Next emergency', 'अगला आपात')} <ArrowRight size={14} />
+        <button onClick={next} className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-sm sm:text-base font-bold text-white shadow-sm cursor-pointer" style={{ background: T.accent }}>
+          {L('Next emergency', 'अगला आपात')} <ArrowRight size={16} />
         </button>
       ))}
 
-      <button onClick={reset} className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500 hover:text-slate-700">
+      <button onClick={reset} className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-slate-500 hover:text-slate-700">
         <RotateCcw size={13} /> {L('Reset', 'रीसेट')}
       </button>
     </FoodShell>

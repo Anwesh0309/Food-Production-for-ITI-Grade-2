@@ -84,34 +84,34 @@ export default function Progress() {
       </div>
 
       {/* Rank Progression */}
-      <div className="card p-4 sm:p-5">
-        <h2 className="font-bold text-base sm:text-lg mb-4 pb-2 border-b border-slate-100 dark:border-slate-800 text-slate-900 dark:text-slate-100">
+      <div className="card p-5 sm:p-6 shadow-xs">
+        <h2 className="font-bold text-lg sm:text-xl mb-4 pb-2.5 border-b border-slate-100 dark:border-slate-800 text-slate-900 dark:text-slate-100">
           {language === 'hi' ? 'करियर सोपान (ब्रिगेड पथ)' : 'Kitchen Career Ladder'}
         </h2>
-        <div className="space-y-2.5">
+        <div className="space-y-3">
           {RANK_THRESHOLDS.map((r, i) => {
             const isAchieved = xp >= r.min;
             const isCurrent = i === currentRankIdx;
             return (
-              <div key={r.min} className={`flex items-center gap-3 p-3 rounded-xl transition-all ${
+              <div key={r.min} className={`flex items-center gap-3.5 p-3.5 rounded-xl transition-all ${
                 isCurrent
-                  ? 'bg-orange-50 dark:bg-orange-950/30 border border-orange-200 dark:border-orange-800/60 shadow-xs'
+                  ? 'bg-orange-50 dark:bg-orange-950/30 border-2 border-orange-300 dark:border-orange-800/80 shadow-xs'
                   : isAchieved
                   ? 'bg-slate-50/70 dark:bg-surface-dark-2/40 border border-slate-200/60 dark:border-slate-700/50'
                   : 'opacity-45 bg-slate-50/40 dark:bg-surface-dark-2/20 border border-transparent'
               }`}>
-                <div className={`w-10 h-10 rounded-xl bg-gradient-to-r ${r.color} flex items-center justify-center text-lg flex-shrink-0 shadow-2xs ${
+                <div className={`w-12 h-12 rounded-2xl bg-gradient-to-r ${r.color} flex items-center justify-center text-xl flex-shrink-0 shadow-2xs ${
                   !isAchieved ? 'grayscale opacity-60' : ''
                 }`}>
                   {r.icon}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-xs sm:text-sm text-slate-900 dark:text-slate-100 truncate">{language === 'hi' ? r.nameHi : r.name}</p>
-                  <p className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{r.min} XP</p>
+                  <p className="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 truncate">{language === 'hi' ? r.nameHi : r.name}</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 font-mono font-semibold mt-0.5">{r.min} XP</p>
                 </div>
-                {isAchieved && !isCurrent && <span className="text-green-500 font-bold text-sm">✓</span>}
+                {isAchieved && !isCurrent && <span className="text-green-500 font-bold text-base">✓</span>}
                 {isCurrent && (
-                  <span className="text-[10px] font-bold bg-orange-100 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300 px-2.5 py-0.5 rounded-full flex-shrink-0">
+                  <span className="text-xs font-bold bg-orange-100 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300 px-3 py-1 rounded-full flex-shrink-0 shadow-2xs">
                     {language === 'hi' ? 'वर्तमान' : 'Current'}
                   </span>
                 )}

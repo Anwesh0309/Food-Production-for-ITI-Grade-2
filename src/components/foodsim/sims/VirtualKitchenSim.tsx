@@ -179,7 +179,7 @@ export function VirtualKitchenSim() {
               key={r.id}
               onClick={() => handleSectionChipClick(r.id)}
               disabled={used && !isSel}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all cursor-pointer shadow-2xs disabled:opacity-35 disabled:cursor-not-allowed ${
+              className={`px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold border transition-all cursor-pointer shadow-2xs disabled:opacity-35 disabled:cursor-not-allowed ${
                 isSel
                   ? 'border-orange-500 bg-orange-50 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300 ring-2 ring-orange-400/40'
                   : 'bg-white dark:bg-surface-dark-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-slate-300'
@@ -413,7 +413,7 @@ export function VirtualKitchenSim() {
                   key={sec.id}
                   disabled={used && !isCurrent}
                   onClick={() => handleSectionChipClick(sec.id)}
-                  className={`px-3 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer shadow-xs disabled:opacity-30 disabled:cursor-not-allowed ${
+                  className={`px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer shadow-xs disabled:opacity-30 disabled:cursor-not-allowed ${
                     isCurrent
                       ? 'bg-orange-600 text-white'
                       : 'bg-white dark:bg-surface-dark-2 border border-orange-200 dark:border-slate-700 text-slate-800 dark:text-slate-100 hover:bg-orange-100 dark:hover:bg-orange-950/40'
@@ -428,11 +428,11 @@ export function VirtualKitchenSim() {
       )}
 
       {hint && !activeRoom && !sel && (
-        <div className="rounded-xl p-3 text-xs bg-orange-50 dark:bg-orange-950/20 border border-orange-200 dark:border-orange-900/40 text-orange-900 dark:text-orange-200 flex items-center justify-between gap-2">
+        <div className="rounded-xl p-3.5 text-xs sm:text-sm bg-orange-50 dark:bg-orange-950/20 border border-orange-200 dark:border-orange-900/40 text-orange-900 dark:text-orange-200 flex items-center justify-between gap-2">
           <span>
             <strong>{L(hint.en, hint.hi)}:</strong> {L(hint.hintEn, hint.hintHi)}
           </span>
-          <span className="text-[11px] font-semibold text-orange-600 dark:text-orange-400 flex-shrink-0">
+          <span className="text-xs font-semibold text-orange-600 dark:text-orange-400 flex-shrink-0">
             {language === 'hi' ? 'अनुभाग टैप करें' : 'Pick section above'}
           </span>
         </div>
@@ -445,22 +445,22 @@ export function VirtualKitchenSim() {
             setChecked(true);
             playTouchSound(correct === ROOMS.length ? 'success' : 'error');
           }}
-          className="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-white disabled:opacity-40 cursor-pointer shadow-sm transition-all"
+          className="px-5 py-2.5 rounded-xl text-sm sm:text-base font-bold text-white disabled:opacity-40 cursor-pointer shadow-sm transition-all"
           style={{ background: T.accent }}
         >
           {L('Check layout', 'लेआउट जांचें')}
         </button>
         <button
           onClick={() => { setPlaced({}); setSel(null); setChecked(false); setHint(null); }}
-          className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-colors"
         >
-          <RotateCcw size={13} /> {L('Reset', 'रीसेट')}
+          <RotateCcw size={14} /> {L('Reset', 'रीसेट')}
         </button>
       </div>
 
       {checked && (
         <div
-          className="rounded-xl p-3.5 text-xs sm:text-sm leading-relaxed border"
+          className="rounded-xl p-3.5 sm:p-4 text-sm sm:text-base leading-relaxed border"
           style={{
             background: correct === ROOMS.length ? '#16a34a1a' : '#f59e0b1a',
             borderColor: correct === ROOMS.length ? '#16a34a40' : '#f59e0b40',

@@ -51,7 +51,7 @@ export function CookingMethodsSim() {
           const state = picked ? (dish.best.includes(m.id) ? 'best' : m.id === picked ? 'wrong' : 'dim') : 'idle';
           return (
             <button key={m.id} onClick={() => pick(m.id)} disabled={!!picked}
-              className={`px-3 py-2.5 rounded-xl text-xs font-semibold border transition-all cursor-pointer shadow-2xs ${
+              className={`px-3.5 sm:px-4 py-3 rounded-xl text-xs sm:text-sm font-bold border transition-all cursor-pointer shadow-2xs min-h-[46px] ${
                 state === 'best' ? 'border-green-500 bg-green-50 dark:bg-green-950/30 text-green-700 dark:text-green-300 font-bold'
                 : state === 'wrong' ? 'border-red-500 bg-red-50 dark:bg-red-950/30 text-red-700 dark:text-red-300'
                 : state === 'dim' ? 'border-slate-200 dark:border-slate-700 opacity-40 bg-white dark:bg-surface-dark-2'
@@ -64,29 +64,29 @@ export function CookingMethodsSim() {
     >
       <div className="rounded-xl border p-3.5 sm:p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3" style={{ borderColor: `${T.accent}44`, background: `${T.accent}0d` }}>
         <div className="flex items-center gap-2.5 min-w-0">
-          <span className="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-md text-white flex-shrink-0" style={{ background: T.accent }}>
+          <span className="text-[10px] sm:text-xs uppercase tracking-wider font-bold px-2.5 py-1 rounded-md text-white flex-shrink-0" style={{ background: T.accent }}>
             {L('Dish', 'व्यंजन')}
           </span>
-          <span className="font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 break-words">{L(dish.en, dish.hi)}</span>
+          <span className="font-bold text-base sm:text-xl text-slate-900 dark:text-slate-100 break-words">{L(dish.en, dish.hi)}</span>
         </div>
         <div className="flex-shrink-0 self-start sm:self-auto">
           <FoodStat label={L('Score', 'स्कोर')} value={`${score}/${asked}`} color={T.accent} />
         </div>
       </div>
       {outcome && (
-        <div className="rounded-xl p-3.5 text-xs sm:text-sm border leading-relaxed" style={{
+        <div className="rounded-xl p-3.5 sm:p-4 text-sm sm:text-base border leading-relaxed" style={{
           background: outcome.ok ? '#16a34a14' : '#dc262614',
           borderColor: outcome.ok ? '#16a34a40' : '#dc262640',
           color: outcome.ok ? '#15803d' : '#b91c1c'
         }}>
-          <div className="flex items-center gap-2 font-bold mb-1.5">
-            {outcome.ok ? <CheckCircle2 size={16} /> : <XCircle size={16} />}
+          <div className="flex items-center gap-2 font-bold mb-1.5 text-base sm:text-lg">
+            {outcome.ok ? <CheckCircle2 size={18} /> : <XCircle size={18} />}
             <span>{outcome.ok ? L('Good choice!', 'अच्छा चुनाव!') : L('Not ideal', 'आदर्श नहीं')}</span>
           </div>
           <p>{L(outcome.en, outcome.hi)}</p>
           <div className="mt-3 text-right">
-            <button onClick={next} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl font-bold text-white text-xs shadow-sm cursor-pointer" style={{ background: T.accent }}>
-              {L('Next dish', 'अगला व्यंजन')} <ArrowRight size={13} />
+            <button onClick={next} className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl font-bold text-white text-sm sm:text-base shadow-sm cursor-pointer" style={{ background: T.accent }}>
+              {L('Next dish', 'अगला व्यंजन')} <ArrowRight size={16} />
             </button>
           </div>
         </div>

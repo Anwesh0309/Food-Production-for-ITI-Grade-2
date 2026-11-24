@@ -123,12 +123,12 @@ export default function Missions() {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1.5 p-1 bg-slate-100 dark:bg-surface-dark-2 rounded-xl border border-slate-200/60 dark:border-slate-700/60 shadow-2xs">
+      <div className="flex gap-1.5 p-1.5 bg-slate-100 dark:bg-surface-dark-2 rounded-xl border border-slate-200/60 dark:border-slate-700/60 shadow-2xs">
         {(['daily', 'weekly', 'challenge'] as const).map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`flex-1 py-2 px-2 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
+            className={`flex-1 py-2.5 px-3 text-xs sm:text-sm font-bold rounded-lg transition-all cursor-pointer ${
               activeTab === tab
                 ? 'bg-white dark:bg-surface-dark-0 shadow-xs text-orange-600 dark:text-orange-400'
                 : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
@@ -141,39 +141,39 @@ export default function Missions() {
         ))}
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-3.5">
         {filtered.map((mission) => (
           <div
             key={mission.id}
-            className={`card p-4 sm:p-5 transition-all ${
+            className={`card p-4 sm:p-5 transition-all shadow-xs ${
               mission.completed
                 ? 'bg-green-50/70 dark:bg-green-950/20 border-green-200 dark:border-green-800/60'
                 : 'hover:border-slate-300 dark:hover:border-slate-600'
             }`}
           >
-            <div className="flex items-start gap-3 sm:gap-4">
-              <span className="text-3xl sm:text-4xl flex-shrink-0 select-none">{mission.icon}</span>
+            <div className="flex items-start gap-3.5 sm:gap-4">
+              <span className="text-4xl sm:text-5xl flex-shrink-0 select-none">{mission.icon}</span>
               <div className="flex-1 min-w-0">
-                <div className="flex items-start justify-between gap-2">
+                <div className="flex items-start justify-between gap-2.5">
                   <div className="min-w-0 flex-1">
-                    <h3 className="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 flex items-center gap-1.5 flex-wrap">
+                    <h3 className="font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 flex items-center gap-2 flex-wrap">
                       <span>{language === 'hi' ? mission.titleHi : mission.title}</span>
-                      {mission.completed && <span className="text-green-600 text-xs">✅</span>}
+                      {mission.completed && <span className="text-green-600 text-sm">✅</span>}
                     </h3>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1 leading-relaxed">
                       {language === 'hi' ? mission.descriptionHi : mission.description}
                     </p>
                   </div>
-                  <span className="flex-shrink-0 text-xs font-bold font-mono bg-amber-100 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 px-2.5 py-1 rounded-full shadow-2xs">
+                  <span className="flex-shrink-0 text-xs sm:text-sm font-bold font-mono bg-amber-100 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 px-3 py-1.5 rounded-full shadow-2xs">
                     +{mission.xpReward} XP
                   </span>
                 </div>
-                <div className="mt-3.5 pt-2 border-t border-slate-100 dark:border-slate-800/80">
-                  <div className="flex justify-between text-[11px] text-slate-500 dark:text-slate-400 mb-1 font-medium">
+                <div className="mt-4 pt-2.5 border-t border-slate-100 dark:border-slate-800/80">
+                  <div className="flex justify-between text-xs text-slate-500 dark:text-slate-400 mb-1.5 font-semibold">
                     <span>{language === 'hi' ? 'प्रगति' : 'Progress'}</span>
                     <span className="font-mono">{mission.progress}/{mission.target}</span>
                   </div>
-                  <div className="progress-bar">
+                  <div className="progress-bar h-2.5">
                     <div
                       className={`progress-fill ${mission.completed ? 'bg-green-500' : 'bg-orange-500'}`}
                       style={{ width: `${(mission.progress / mission.target) * 100}%` }}

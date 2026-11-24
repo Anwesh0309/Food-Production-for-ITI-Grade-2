@@ -41,21 +41,21 @@ export function VegCutsSim() {
           const state = picked ? (o.id === cut.id ? 'right' : o.id === picked ? 'wrong' : 'dim') : 'idle';
           return (
             <button key={o.id} onClick={() => choose(o.id)} disabled={!!picked}
-              className={`text-left text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border transition-all flex items-center justify-between cursor-pointer shadow-2xs ${
+              className={`text-left text-sm sm:text-base px-4 py-3 rounded-xl border transition-all flex items-center justify-between cursor-pointer shadow-2xs min-h-[48px] ${
                 state === 'right' ? 'border-green-500 bg-green-50 dark:bg-green-950/30 text-green-700 dark:text-green-300 font-bold'
                 : state === 'wrong' ? 'border-red-500 bg-red-50 dark:bg-red-950/30 text-red-700 dark:text-red-300'
                 : state === 'dim' ? 'border-slate-200 dark:border-slate-700 opacity-40 bg-white dark:bg-surface-dark-2'
                 : 'border-slate-200 dark:border-slate-700 hover:border-green-500 bg-white dark:bg-surface-dark-2 text-slate-800 dark:text-slate-200'}`}>
               <span className="pr-1">{L(o.en, o.hi)}</span>
-              {state === 'right' && <Check size={16} className="ml-auto text-green-600 flex-shrink-0" />}
-              {state === 'wrong' && <X size={16} className="ml-auto text-red-600 flex-shrink-0" />}
+              {state === 'right' && <Check size={18} className="ml-auto text-green-600 flex-shrink-0" />}
+              {state === 'wrong' && <X size={18} className="ml-auto text-red-600 flex-shrink-0" />}
             </button>
           );
         })}
       </div>}
     >
       <div className="rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden bg-amber-50/40 dark:bg-slate-900/40">
-        <svg viewBox="0 0 180 100" className="w-full max-w-[280px] mx-auto block" style={{ maxHeight: 150 }}>
+        <svg viewBox="0 0 180 100" className="w-full max-w-[340px] mx-auto block" style={{ maxHeight: 180 }}>
           <rect x="0" y="0" width="180" height="100" className="fill-amber-50/30 dark:fill-slate-900/50" />
           {/* chopping board */}
           <rect x="8" y="8" width="164" height="84" rx="6" fill="#e9dcc3" stroke="#cbb893" strokeWidth="2" />
@@ -65,8 +65,8 @@ export function VegCutsSim() {
       <div className="flex items-center justify-between gap-3 flex-wrap pt-1">
         <FoodStat label={L('Score', 'स्कोर')} value={`${score}/${asked}`} color={T.accent} />
         {picked && (
-          <button onClick={next} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl font-bold text-white text-xs sm:text-sm shadow-sm cursor-pointer" style={{ background: T.accent }}>
-            {L('Next cut', 'अगला कट')} <ArrowRight size={14} />
+          <button onClick={next} className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl font-bold text-white text-sm sm:text-base shadow-sm cursor-pointer" style={{ background: T.accent }}>
+            {L('Next cut', 'अगला कट')} <ArrowRight size={16} />
           </button>
         )}
       </div>

@@ -48,8 +48,8 @@ export function ChefUniformSim() {
 
       <div className="grid sm:grid-cols-2 grid-cols-1 gap-3">
         {/* chef figure */}
-        <div className="rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-surface-dark-2 flex justify-center py-2">
-          <svg viewBox="0 0 220 320" className="w-full max-w-[220px]">
+        <div className="rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-surface-dark-2 flex justify-center py-3">
+          <svg viewBox="0 0 220 320" className="w-full max-w-[260px]">
             {/* legs / trousers */}
             <g onClick={() => { const p = PARTS.find(x => x.id === 'trousers'); if (p) toggle(p); }} style={{ cursor: 'pointer' }}>
               {has('trousers') ? (
@@ -137,24 +137,24 @@ export function ChefUniformSim() {
         </div>
 
         {/* parts tray */}
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2.5">
           {PARTS.map((p) => {
             const isWorn = has(p.id);
             return (
               <button
                 key={p.id}
                 onClick={() => toggle(p)}
-                className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold border transition-all text-left cursor-pointer shadow-2xs ${
+                className={`flex items-center justify-between px-4 py-3 rounded-xl text-xs sm:text-sm font-bold border transition-all text-left cursor-pointer shadow-2xs ${
                   isWorn
-                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300'
+                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300 ring-2 ring-blue-400/30'
                     : 'bg-white dark:bg-surface-dark-2 border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 text-slate-700 dark:text-slate-200'
                 }`}
               >
                 <span className="flex items-center gap-2.5">
-                  <Shirt size={14} className={isWorn ? 'text-blue-600 dark:text-blue-400' : 'text-slate-400'} />
+                  <Shirt size={17} className={isWorn ? 'text-blue-600 dark:text-blue-400' : 'text-slate-400'} />
                   <span>{L(p.en, p.hi)}</span>
                 </span>
-                {isWorn && <CheckCircle2 size={15} className="text-blue-600 dark:text-blue-400 flex-shrink-0" />}
+                {isWorn && <CheckCircle2 size={17} className="text-blue-600 dark:text-blue-400 flex-shrink-0" />}
               </button>
             );
           })}
@@ -162,12 +162,12 @@ export function ChefUniformSim() {
       </div>
 
       {active ? (
-        <div className="rounded-xl border p-3.5 bg-blue-50/70 dark:bg-blue-950/20 border-blue-200 dark:border-blue-900/40">
-          <p className="font-bold text-sm mb-1 text-blue-700 dark:text-blue-300">{L(active.en, active.hi)}</p>
-          <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">{L(active.whyEn, active.whyHi)}</p>
+        <div className="rounded-xl border p-4 bg-blue-50/70 dark:bg-blue-950/20 border-blue-200 dark:border-blue-900/40">
+          <p className="font-bold text-sm sm:text-base mb-1.5 text-blue-700 dark:text-blue-300">{L(active.en, active.hi)}</p>
+          <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">{L(active.whyEn, active.whyHi)}</p>
         </div>
       ) : (
-        <p className="text-xs text-slate-400 text-center py-1">{L('Tap an item to put it on the chef and read why it matters.', 'शेफ पर पहनाने व कारण पढ़ने हेतु वस्तु टैप करें।')}</p>
+        <p className="text-xs sm:text-sm text-slate-400 text-center py-1.5">{L('Tap an item to put it on the chef and read why it matters.', 'शेफ पर पहनाने व कारण पढ़ने हेतु वस्तु टैप करें।')}</p>
       )}
 
       {done && (

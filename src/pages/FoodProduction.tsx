@@ -61,17 +61,17 @@ export default function FoodProduction() {
 
       {/* Sections and Module Cards */}
       {sections.map((sec) => (
-        <div key={sec.label.en} className="space-y-3">
-          <div className="flex items-center justify-between gap-2 border-b border-slate-200 dark:border-slate-800 pb-2">
-            <h2 className="text-base sm:text-lg font-bold flex items-center gap-2 text-slate-800 dark:text-slate-100">
+        <div key={sec.label.en} className="space-y-3.5">
+          <div className="flex items-center justify-between gap-2 border-b border-slate-200 dark:border-slate-800 pb-2.5">
+            <h2 className="text-lg sm:text-xl font-bold flex items-center gap-2.5 text-slate-800 dark:text-slate-100">
               <span>{L(sec.label)}</span>
             </h2>
-            <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-slate-100 dark:bg-surface-dark-2 text-slate-600 dark:text-slate-400">
+            <span className="text-xs sm:text-sm font-semibold px-3 py-1 rounded-full bg-slate-100 dark:bg-surface-dark-2 text-slate-600 dark:text-slate-300">
               {sec.mods.filter((m) => completedLessons.includes(`food-${m.id}`)).length}/{sec.mods.length} {language === 'hi' ? 'पूर्ण' : 'done'}
             </span>
           </div>
 
-          <div className="grid gap-3.5 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2">
             {sec.mods.map((m) => {
               const theme = FOOD_THEMES[m.themeKey];
               const Icon = theme.Icon;
@@ -80,37 +80,37 @@ export default function FoodProduction() {
                 <Link
                   key={m.id}
                   to={`/modules/${m.id}`}
-                  className="card p-4 transition-all duration-200 card-hover cursor-pointer block group relative"
+                  className="card p-4 sm:p-5 transition-all duration-200 card-hover cursor-pointer block group relative shadow-xs"
                   style={{ borderLeftWidth: '4px', borderLeftColor: theme.accent }}
                 >
-                  <div className="flex items-start gap-3">
+                  <div className="flex items-start gap-3.5">
                     <span
-                      className="grid place-items-center w-11 h-11 rounded-xl flex-shrink-0 transition-transform group-hover:scale-105"
+                      className="grid place-items-center w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex-shrink-0 transition-transform group-hover:scale-105 shadow-2xs"
                       style={{ background: withAlpha(theme.accent, 0.14), color: theme.accent }}
                     >
-                      <Icon size={22} strokeWidth={2.1} />
+                      <Icon size={26} strokeWidth={2.2} />
                     </span>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-start justify-between gap-2">
-                        <h3 className="font-bold text-sm leading-snug text-slate-900 dark:text-slate-100 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
+                        <h3 className="font-bold text-sm sm:text-base leading-snug text-slate-900 dark:text-slate-100 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
                           {m.id}. {L(m.title)}
                         </h3>
                         {done && (
-                          <span className="flex-shrink-0 inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300">
-                            <Check size={11} strokeWidth={2.5} /> {language === 'hi' ? 'पूर्ण' : 'Done'}
+                          <span className="flex-shrink-0 inline-flex items-center gap-1 text-xs font-bold px-2.5 py-0.5 rounded-full bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300 shadow-2xs">
+                            <Check size={12} strokeWidth={2.5} /> {language === 'hi' ? 'पूर्ण' : 'Done'}
                           </span>
                         )}
                       </div>
-                      <p className="text-xs text-slate-600 dark:text-slate-400 mt-1 line-clamp-2 leading-relaxed">
+                      <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1.5 line-clamp-2 leading-relaxed">
                         {L(m.desc)}
                       </p>
-                      <div className="flex items-center justify-between mt-2.5 pt-1 border-t border-slate-100 dark:border-slate-800/80">
-                        <div className="flex items-center gap-1.5 text-[11px] font-semibold" style={{ color: theme.accent }}>
-                          <FlaskConical size={12} />
+                      <div className="flex items-center justify-between mt-3 pt-2 border-t border-slate-100 dark:border-slate-800/80">
+                        <div className="flex items-center gap-1.5 text-xs font-semibold" style={{ color: theme.accent }}>
+                          <FlaskConical size={14} />
                           <span>{language === 'hi' ? 'इंटरैक्टिव सिमुलेशन' : 'Interactive simulation'}</span>
                         </div>
-                        <span className="text-xs text-slate-400 group-hover:text-orange-500 transition-transform group-hover:translate-x-1 flex items-center">
-                          <ArrowRight size={13} />
+                        <span className="text-sm text-slate-400 group-hover:text-orange-500 transition-transform group-hover:translate-x-1 flex items-center">
+                          <ArrowRight size={15} />
                         </span>
                       </div>
                     </div>

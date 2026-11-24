@@ -72,7 +72,7 @@ export function PlatingStudioSim() {
       </div>
 
       {/* palette */}
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2.5">
         {COMPS.map((c) => {
           const isSel = sel === c.id;
           const isPlaced = placed[c.id] !== undefined;
@@ -80,22 +80,22 @@ export function PlatingStudioSim() {
             <div
               key={c.id}
               onClick={() => setSel(c.id)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all flex items-center gap-1.5 cursor-pointer shadow-2xs ${
+              className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold border transition-all flex items-center gap-2 cursor-pointer shadow-2xs ${
                 isSel
                   ? 'border-pink-500 bg-pink-50 dark:bg-pink-950/30 text-pink-700 dark:text-pink-300 ring-2 ring-pink-400/40'
                   : 'bg-white dark:bg-surface-dark-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-slate-300'
               }`}
               style={isSel ? { borderColor: c.color, color: c.color } : {}}
             >
-              <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ background: c.color }} />
+              <span className="w-3 h-3 rounded-full flex-shrink-0" style={{ background: c.color }} />
               <span>{L(c.en, c.hi)}</span>
               {isPlaced && (
-                <div className="flex items-center gap-1 ml-1">
-                  <CheckCircle2 size={12} className="text-green-600 dark:text-green-400" />
+                <div className="flex items-center gap-1 ml-1.5">
+                  <CheckCircle2 size={14} className="text-green-600 dark:text-green-400" />
                   <span
                     onClick={(e) => removeComp(c.id, e)}
                     title={language === 'hi' ? 'हटाएं' : 'Remove from plate'}
-                    className="text-slate-400 hover:text-red-500 font-bold text-xs px-0.5 rounded cursor-pointer"
+                    className="text-slate-400 hover:text-red-500 font-extrabold text-sm px-1 rounded cursor-pointer"
                   >
                     ×
                   </span>
@@ -106,8 +106,8 @@ export function PlatingStudioSim() {
         })}
       </div>
 
-      <div className="rounded-xl border border-slate-200 dark:border-slate-700 flex justify-center py-3 bg-slate-50 dark:bg-slate-900/40">
-        <svg viewBox="0 0 300 300" className="w-full max-w-[300px]" style={{ touchAction: 'manipulation' }}>
+      <div className="rounded-xl border border-slate-200 dark:border-slate-700 flex justify-center py-4 bg-slate-50 dark:bg-slate-900/40">
+        <svg viewBox="0 0 300 300" className="w-full max-w-[340px]" style={{ touchAction: 'manipulation' }}>
           <defs>
             <radialGradient id="plate" cx="0.4" cy="0.35" r="0.8"><stop offset="0" stopColor="#ffffff" /><stop offset="1" stopColor="#e2e8f0" /></radialGradient>
           </defs>
@@ -122,8 +122,8 @@ export function PlatingStudioSim() {
               <g key={hour} onClick={() => placeAt(hour)} style={{ cursor: 'pointer' }}>
                 {/* enlarged hit target */}
                 <circle cx={p.x} cy={p.y} r="22" fill="transparent" />
-                <circle cx={p.x} cy={p.y} r="15" fill="#64748b" fillOpacity="0.08" stroke="#cbd5e1" strokeWidth="1" strokeDasharray="2 2" />
-                <text x={p.x} y={p.y + 3.5} textAnchor="middle" fontSize="9" fontWeight="700" fill="#64748b">{hour}</text>
+                <circle cx={p.x} cy={p.y} r="16" fill="#64748b" fillOpacity="0.08" stroke="#cbd5e1" strokeWidth="1" strokeDasharray="2 2" />
+                <text x={p.x} y={p.y + 4} textAnchor="middle" fontSize="10" fontWeight="800" fill="#64748b">{hour}</text>
               </g>
             );
           })}

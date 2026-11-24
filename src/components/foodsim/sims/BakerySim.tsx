@@ -54,8 +54,8 @@ export function BakerySim() {
       </div>
 
       {/* oven */}
-      <div className="rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden bg-slate-100 dark:bg-slate-900/60">
-        <svg viewBox="0 0 320 200" className="w-full block max-w-md mx-auto">
+      <div className="rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden bg-slate-100 dark:bg-slate-900/60 py-2">
+        <svg viewBox="0 0 320 200" className="w-full block max-w-lg mx-auto">
           <rect x="0" y="0" width="320" height="200" className="fill-slate-100 dark:fill-slate-900" />
           <rect x="60" y="30" width="200" height="150" rx="10" fill="#cbd5e1" stroke="#94a3b8" strokeWidth="2" />
           <rect x="74" y="60" width="172" height="100" rx="6" fill={result === 'burnt' ? '#2a1a10' : '#4b3626'} />
@@ -70,16 +70,16 @@ export function BakerySim() {
           {item.id === 'puff' && <path d={`M130 150 L138 ${result === 'golden' || result === 'burnt' ? 112 : 128} L150 ${result === 'golden' || result === 'burnt' ? 118 : 132} L162 ${result === 'golden' || result === 'burnt' ? 110 : 128} L174 ${result === 'golden' || result === 'burnt' ? 118 : 132} L182 ${result === 'golden' || result === 'burnt' ? 112 : 128} L190 150 Z`} fill={bakeColor} />}
           {/* knobs */}
           <circle cx="90" cy="46" r="6" fill="#64748b" /><circle cx="110" cy="46" r="6" fill="#64748b" />
-          <text x="160" y="24" textAnchor="middle" fontSize="12" className="fill-slate-700 dark:fill-slate-200" fontWeight="700">{L(item.en, item.hi)}</text>
+          <text x="160" y="24" textAnchor="middle" fontSize="13" className="fill-slate-800 dark:fill-slate-100" fontWeight="800">{L(item.en, item.hi)}</text>
         </svg>
       </div>
 
       {choice === null ? (
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
           {BANDS.map((b, i) => (
             <button key={i} onClick={() => choose(i)}
-              className="px-3 py-2.5 rounded-xl text-xs font-semibold border flex items-center justify-center gap-1.5 transition-all bg-white dark:bg-surface-dark-2 border-slate-200 dark:border-slate-700 hover:border-orange-500 dark:hover:border-orange-400 text-slate-800 dark:text-slate-200 cursor-pointer shadow-2xs">
-              <Flame size={14} className="text-orange-500 flex-shrink-0" />
+              className="px-3.5 py-3 rounded-xl text-xs sm:text-sm font-bold border flex items-center justify-center gap-2 transition-all bg-white dark:bg-surface-dark-2 border-slate-200 dark:border-slate-700 hover:border-orange-500 dark:hover:border-orange-400 text-slate-800 dark:text-slate-200 cursor-pointer shadow-2xs">
+              <Flame size={16} className="text-orange-500 flex-shrink-0" />
               <span className="truncate">{L(b.en, b.hi)}</span>
             </button>
           ))}

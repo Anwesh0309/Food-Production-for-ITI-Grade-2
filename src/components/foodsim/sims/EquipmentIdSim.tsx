@@ -34,14 +34,14 @@ export function EquipmentIdSim() {
           const state = picked ? (o.en === q.use.en ? 'right' : o.en === picked ? 'wrong' : 'dim') : 'idle';
           return (
             <button key={o.en} onClick={() => choose(o.en)} disabled={!!picked}
-              className={`text-left text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border transition-all flex items-center justify-between cursor-pointer shadow-2xs ${
+              className={`text-left text-sm sm:text-base px-4 py-3 rounded-xl border transition-all flex items-center justify-between cursor-pointer shadow-2xs min-h-[48px] ${
                 state === 'right' ? 'border-green-500 bg-green-50 dark:bg-green-950/30 text-green-700 dark:text-green-300 font-bold'
                 : state === 'wrong' ? 'border-red-500 bg-red-50 dark:bg-red-950/30 text-red-700 dark:text-red-300'
                 : state === 'dim' ? 'border-slate-200 dark:border-slate-700 opacity-40 bg-white dark:bg-surface-dark-2'
                 : 'border-slate-200 dark:border-slate-700 hover:border-indigo-500 bg-white dark:bg-surface-dark-2 text-slate-800 dark:text-slate-200'}`}>
               <span className="pr-2">{L(o.en, o.hi)}</span>
-              {state === 'right' && <Check size={16} className="ml-auto text-green-600 flex-shrink-0" />}
-              {state === 'wrong' && <X size={16} className="ml-auto text-red-600 flex-shrink-0" />}
+              {state === 'right' && <Check size={18} className="ml-auto text-green-600 flex-shrink-0" />}
+              {state === 'wrong' && <X size={18} className="ml-auto text-red-600 flex-shrink-0" />}
             </button>
           );
         })}
@@ -49,10 +49,10 @@ export function EquipmentIdSim() {
     >
       <div className="rounded-xl border p-3.5 sm:p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3" style={{ borderColor: `${T.accent}44`, background: `${T.accent}0d` }}>
         <div className="flex items-center gap-3 min-w-0">
-          <span className="grid place-items-center w-11 h-11 rounded-xl text-white font-bold flex-shrink-0 shadow-xs" style={{ background: T.accent }}><T.Icon size={22} /></span>
+          <span className="grid place-items-center w-12 h-12 rounded-xl text-white font-bold flex-shrink-0 shadow-xs" style={{ background: T.accent }}><T.Icon size={24} /></span>
           <div className="min-w-0">
-            <p className="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold">{L('Identify the primary use of', 'मुख्य उपयोग पहचानें')}</p>
-            <p className="font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 break-words">{L(q.tool.en, q.tool.hi)}</p>
+            <p className="text-[10px] sm:text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold">{L('Identify the primary use of', 'मुख्य उपयोग पहचानें')}</p>
+            <p className="font-bold text-base sm:text-xl text-slate-900 dark:text-slate-100 break-words">{L(q.tool.en, q.tool.hi)}</p>
           </div>
         </div>
         <div className="flex-shrink-0 self-start sm:self-auto">
@@ -61,8 +61,8 @@ export function EquipmentIdSim() {
       </div>
       {picked && (
         <div className="text-right pt-1">
-          <button onClick={next} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl font-bold text-white text-xs sm:text-sm shadow-sm cursor-pointer" style={{ background: T.accent }}>
-            {L('Next tool', 'अगला औज़ार')} <ArrowRight size={14} />
+          <button onClick={next} className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl font-bold text-white text-sm sm:text-base shadow-sm cursor-pointer" style={{ background: T.accent }}>
+            {L('Next tool', 'अगला औज़ार')} <ArrowRight size={16} />
           </button>
         </div>
       )}

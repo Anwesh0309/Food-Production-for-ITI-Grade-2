@@ -110,38 +110,38 @@ export default function Glossary() {
       </div>
 
       {/* Terms grid */}
-      <div className="grid sm:grid-cols-2 gap-3.5 sm:gap-4">
+      <div className="grid sm:grid-cols-2 gap-4">
         {filtered.map((term) => (
-          <div key={term.id} className="card p-4 sm:p-4.5 card-hover flex flex-col justify-between">
+          <div key={term.id} className="card p-5 card-hover flex flex-col justify-between shadow-xs">
             <div>
-              <div className="flex items-start justify-between gap-2">
+              <div className="flex items-start justify-between gap-2.5">
                 <div className="min-w-0 flex-1">
-                  <h3 className="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 truncate">{term.term}</h3>
-                  <p className="text-xs text-orange-600 dark:text-orange-400 font-semibold mt-0.5 truncate">{term.termHi}</p>
+                  <h3 className="font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 truncate">{term.term}</h3>
+                  <p className="text-xs sm:text-sm text-orange-600 dark:text-orange-400 font-semibold mt-0.5 truncate">{term.termHi}</p>
                 </div>
-                <span className="text-[10px] font-bold uppercase tracking-wider bg-slate-100 dark:bg-surface-dark-2 text-slate-600 dark:text-slate-300 px-2.5 py-0.5 rounded-full flex-shrink-0 border border-slate-200/60 dark:border-slate-700/60">
+                <span className="text-xs font-bold uppercase tracking-wider bg-slate-100 dark:bg-surface-dark-2 text-slate-600 dark:text-slate-300 px-3 py-1 rounded-full flex-shrink-0 border border-slate-200/60 dark:border-slate-700/60 shadow-2xs">
                   {term.category}
                 </span>
               </div>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-2.5 leading-relaxed">
+              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 mt-3 leading-relaxed">
                 {language === 'hi' ? term.definitionHi : term.definition}
               </p>
             </div>
 
             {(term.symbol || term.unit || term.formula) && (
-              <div className="flex flex-wrap gap-1.5 mt-3 pt-2.5 border-t border-slate-100 dark:border-slate-800">
+              <div className="flex flex-wrap gap-2 mt-3.5 pt-3 border-t border-slate-100 dark:border-slate-800">
                 {term.symbol && (
-                  <span className="text-[10px] font-mono bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 px-2 py-0.5 rounded border border-blue-200 dark:border-blue-800/40 font-semibold">
+                  <span className="text-xs font-mono bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 px-2.5 py-1 rounded-lg border border-blue-200 dark:border-blue-800/40 font-bold">
                     {language === 'hi' ? 'प्रतीक' : 'Symbol'}: {term.symbol}
                   </span>
                 )}
                 {term.unit && (
-                  <span className="text-[10px] font-mono bg-green-50 dark:bg-green-950/40 text-green-700 dark:text-green-300 px-2 py-0.5 rounded border border-green-200 dark:border-green-800/40 font-semibold">
+                  <span className="text-xs font-mono bg-green-50 dark:bg-green-950/40 text-green-700 dark:text-green-300 px-2.5 py-1 rounded-lg border border-green-200 dark:border-green-800/40 font-bold">
                     {language === 'hi' ? 'इकाई' : 'Unit'}: {term.unit}
                   </span>
                 )}
                 {term.formula && (
-                  <span className="text-[10px] font-mono bg-orange-50 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300 px-2 py-0.5 rounded border border-orange-200 dark:border-orange-800/40 font-bold">
+                  <span className="text-xs font-mono bg-orange-50 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300 px-2.5 py-1 rounded-lg border border-orange-200 dark:border-orange-800/40 font-extrabold">
                     {term.formula}
                   </span>
                 )}

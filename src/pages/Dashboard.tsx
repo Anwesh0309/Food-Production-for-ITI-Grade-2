@@ -5,16 +5,16 @@ import { ArrowRight, Sparkles } from 'lucide-react';
 
 function StatCard({ icon, label, value, color }: { icon: string; label: string; value: string | number; color: string }) {
   return (
-    <div className="card p-3.5 sm:p-4">
-      <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
-        <div className={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl ${color} flex items-center justify-center text-lg sm:text-xl flex-shrink-0 shadow-2xs`}>
+    <div className="card p-4 sm:p-5 shadow-xs">
+      <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+        <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl ${color} flex items-center justify-center text-xl sm:text-2xl flex-shrink-0 shadow-2xs`}>
           {icon}
         </div>
         <div className="min-w-0 flex-1">
-          <p className="text-base sm:text-xl font-bold text-slate-900 dark:text-white truncate font-mono">
+          <p className="text-lg sm:text-2xl font-extrabold text-slate-900 dark:text-white truncate font-mono">
             {value}
           </p>
-          <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 truncate mt-0.5 font-medium">
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 truncate mt-0.5 font-semibold">
             {label}
           </p>
         </div>
@@ -132,46 +132,46 @@ export default function Dashboard() {
             <h2 className="font-bold text-base sm:text-lg mb-3 pb-2 border-b border-slate-100 dark:border-slate-800 text-slate-900 dark:text-slate-100">
               {t('dashboard.quickActions')}
             </h2>
-            <div className="space-y-2">
-              <Link to="/labs/virtualKitchen" className="card-hover p-2.5 sm:p-3 flex items-center justify-between gap-3 group">
-                <div className="flex items-center gap-3 min-w-0">
-                  <span className="text-2xl flex-shrink-0">🍳</span>
+            <div className="space-y-2.5">
+              <Link to="/labs/virtualKitchen" className="card-hover p-3 sm:p-3.5 flex items-center justify-between gap-3 group">
+                <div className="flex items-center gap-3.5 min-w-0">
+                  <span className="text-3xl flex-shrink-0">🍳</span>
                   <div className="min-w-0">
-                    <p className="font-semibold text-xs sm:text-sm text-slate-800 dark:text-slate-200 truncate">{language === 'hi' ? 'वर्चुअल रसोई' : 'Virtual Kitchen'}</p>
-                    <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">{language === 'hi' ? 'रसोई अनुभाग लेआउट' : 'Lay out kitchen sections'}</p>
+                    <p className="font-bold text-sm sm:text-base text-slate-800 dark:text-slate-200 truncate">{language === 'hi' ? 'वर्चुअल रसोई' : 'Virtual Kitchen'}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 truncate">{language === 'hi' ? 'रसोई अनुभाग लेआउट' : 'Lay out kitchen sections'}</p>
                   </div>
                 </div>
-                <ArrowRight size={14} className="text-slate-400 group-hover:text-orange-500 group-hover:translate-x-1 transition-all flex-shrink-0" />
+                <ArrowRight size={16} className="text-slate-400 group-hover:text-orange-500 group-hover:translate-x-1.5 transition-all flex-shrink-0" />
               </Link>
-              <Link to="/labs/foodSafety" className="card-hover p-2.5 sm:p-3 flex items-center justify-between gap-3 group">
-                <div className="flex items-center gap-3 min-w-0">
-                  <span className="text-2xl flex-shrink-0">🧼</span>
+              <Link to="/labs/foodSafety" className="card-hover p-3 sm:p-3.5 flex items-center justify-between gap-3 group">
+                <div className="flex items-center gap-3.5 min-w-0">
+                  <span className="text-3xl flex-shrink-0">🧼</span>
                   <div className="min-w-0">
-                    <p className="font-semibold text-xs sm:text-sm text-slate-800 dark:text-slate-200 truncate">{language === 'hi' ? 'खाद्य सुरक्षा निरीक्षक' : 'Food Safety Inspector'}</p>
-                    <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">{language === 'hi' ? 'खतरे खोजें' : 'Spot kitchen hazards'}</p>
+                    <p className="font-bold text-sm sm:text-base text-slate-800 dark:text-slate-200 truncate">{language === 'hi' ? 'खाद्य सुरक्षा निरीक्षक' : 'Food Safety Inspector'}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 truncate">{language === 'hi' ? 'खतरे खोजें' : 'Spot kitchen hazards'}</p>
                   </div>
                 </div>
-                <ArrowRight size={14} className="text-slate-400 group-hover:text-orange-500 group-hover:translate-x-1 transition-all flex-shrink-0" />
+                <ArrowRight size={16} className="text-slate-400 group-hover:text-orange-500 group-hover:translate-x-1.5 transition-all flex-shrink-0" />
               </Link>
-              <Link to="/labs/kitchenSafety" className="card-hover p-2.5 sm:p-3 flex items-center justify-between gap-3 group">
-                <div className="flex items-center gap-3 min-w-0">
-                  <span className="text-2xl flex-shrink-0">🧯</span>
+              <Link to="/labs/kitchenSafety" className="card-hover p-3 sm:p-3.5 flex items-center justify-between gap-3 group">
+                <div className="flex items-center gap-3.5 min-w-0">
+                  <span className="text-3xl flex-shrink-0">🧯</span>
                   <div className="min-w-0">
-                    <p className="font-semibold text-xs sm:text-sm text-slate-800 dark:text-slate-200 truncate">{language === 'hi' ? 'रसोई सुरक्षा' : 'Kitchen Safety'}</p>
-                    <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">{language === 'hi' ? 'आपात प्रतिक्रिया' : 'Emergency response'}</p>
+                    <p className="font-bold text-sm sm:text-base text-slate-800 dark:text-slate-200 truncate">{language === 'hi' ? 'रसोई सुरक्षा' : 'Kitchen Safety'}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 truncate">{language === 'hi' ? 'आपात प्रतिक्रिया' : 'Emergency response'}</p>
                   </div>
                 </div>
-                <ArrowRight size={14} className="text-slate-400 group-hover:text-orange-500 group-hover:translate-x-1 transition-all flex-shrink-0" />
+                <ArrowRight size={16} className="text-slate-400 group-hover:text-orange-500 group-hover:translate-x-1.5 transition-all flex-shrink-0" />
               </Link>
-              <Link to="/assessments" className="card-hover p-2.5 sm:p-3 flex items-center justify-between gap-3 group">
-                <div className="flex items-center gap-3 min-w-0">
-                  <span className="text-2xl flex-shrink-0">📝</span>
+              <Link to="/assessments" className="card-hover p-3 sm:p-3.5 flex items-center justify-between gap-3 group">
+                <div className="flex items-center gap-3.5 min-w-0">
+                  <span className="text-3xl flex-shrink-0">📝</span>
                   <div className="min-w-0">
-                    <p className="font-semibold text-xs sm:text-sm text-slate-800 dark:text-slate-200 truncate">{t('nav.quiz')}</p>
-                    <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">{language === 'hi' ? 'अपना ज्ञान परखें' : 'Test your knowledge'}</p>
+                    <p className="font-bold text-sm sm:text-base text-slate-800 dark:text-slate-200 truncate">{t('nav.quiz')}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 truncate">{language === 'hi' ? 'अपना ज्ञान परखें' : 'Test your knowledge'}</p>
                   </div>
                 </div>
-                <ArrowRight size={14} className="text-slate-400 group-hover:text-orange-500 group-hover:translate-x-1 transition-all flex-shrink-0" />
+                <ArrowRight size={16} className="text-slate-400 group-hover:text-orange-500 group-hover:translate-x-1.5 transition-all flex-shrink-0" />
               </Link>
             </div>
           </div>
@@ -179,32 +179,32 @@ export default function Dashboard() {
       </div>
 
       {/* Badges */}
-      <div className="card p-4 sm:p-5">
-        <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-100 dark:border-slate-800">
+      <div className="card p-4 sm:p-6">
+        <div className="flex items-center justify-between mb-4 pb-2.5 border-b border-slate-100 dark:border-slate-800">
           <h2 className="font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 flex items-center gap-2">
-            <Sparkles size={18} className="text-amber-500" />
+            <Sparkles size={20} className="text-amber-500" />
             <span>{t('badges.title')}</span>
           </h2>
-          <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-surface-dark-2 text-slate-600 dark:text-slate-300">
+          <span className="text-xs sm:text-sm font-semibold px-3 py-1 rounded-full bg-slate-100 dark:bg-surface-dark-2 text-slate-600 dark:text-slate-300">
             {earnedBadges}/{badges.length}
           </span>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2.5 sm:gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
           {badges.map((badge) => (
             <div
               key={badge.id}
-              className={`flex items-center gap-3 p-3 rounded-xl border transition-all ${
+              className={`flex items-center gap-3.5 p-3.5 rounded-xl border transition-all ${
                 badge.earned
                   ? 'bg-amber-50/70 dark:bg-amber-950/20 border-amber-200 dark:border-amber-800/60 shadow-2xs'
                   : 'bg-slate-50/60 dark:bg-surface-dark-2/40 border-slate-200/80 dark:border-slate-700/60 opacity-60'
               }`}
             >
-              <span className="text-2xl flex-shrink-0">{badge.icon}</span>
+              <span className="text-3xl flex-shrink-0">{badge.icon}</span>
               <div className="min-w-0 flex-1">
-                <p className="text-xs font-bold text-slate-900 dark:text-slate-100 truncate">
+                <p className="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100 truncate">
                   {language === 'hi' ? badge.nameHi : badge.name}
                 </p>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5">
+                <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5">
                   {badge.earned ? (language === 'hi' ? '✓ अर्जित' : '✓ Unlocked') : badge.description}
                 </p>
               </div>
