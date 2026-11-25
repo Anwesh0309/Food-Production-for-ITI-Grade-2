@@ -103,7 +103,7 @@ export default function Sidebar() {
               <span className="text-xl flex-shrink-0">👨‍🍳</span>
               <div className="min-w-0 flex-1">
                 <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
-                  Level {level}
+                  {language === 'hi' ? `स्तर ${level}` : `Level ${level}`}
                 </p>
                 <p className="font-semibold text-sm text-orange-700 dark:text-orange-300 truncate">
                   {language === 'hi' ? rankHi : rank}
@@ -117,11 +117,13 @@ export default function Sidebar() {
               />
             </div>
             <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-1 truncate">
-              {xp} XP — {200 - (xp % 200)} to next level
+              {language === 'hi'
+                ? `${xp} XP — अगले स्तर के लिए ${200 - (xp % 200)} शेष`
+                : `${xp} XP — ${200 - (xp % 200)} to next level`}
             </p>
           </div>
         ) : (
-          <div className="mb-4 mx-auto hidden md:flex flex-col items-center justify-center w-10 h-10 rounded-xl bg-orange-50 dark:bg-orange-950/40 border border-orange-200 dark:border-orange-800/60" title={`Level ${level} • ${xp} XP`}>
+          <div className="mb-4 mx-auto hidden md:flex flex-col items-center justify-center w-10 h-10 rounded-xl bg-orange-50 dark:bg-orange-950/40 border border-orange-200 dark:border-orange-800/60" title={language === 'hi' ? `स्तर ${level} • ${xp} XP` : `Level ${level} • ${xp} XP`}>
             <span className="text-[10px] font-bold text-orange-700 dark:text-orange-300">L{level}</span>
           </div>
         )}

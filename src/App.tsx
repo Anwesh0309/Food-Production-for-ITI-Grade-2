@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAppStore } from './context/store';
 import { initTouchSoundListener } from './utils/sound';
 import Layout from './components/layout/Layout';
@@ -14,11 +15,20 @@ import Missions from './pages/Missions';
 import Glossary from './pages/Glossary';
 
 function App() {
+  const { i18n } = useTranslation();
   const theme = useAppStore((s) => s.theme);
+  const language = useAppStore((s) => s.language);
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', theme === 'dark');
   }, [theme]);
+
+  useEffect(() => {
+    if (i18n.language !== language) {
+      i18n.changeLanguage(language);
+    }
+    document.documentElement.lang = language;
+  }, [language, i18n]);
 
   useEffect(() => {
     return initTouchSoundListener();

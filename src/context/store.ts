@@ -7,6 +7,7 @@ export interface Badge {
   nameHi: string;
   icon: string;
   description: string;
+  descriptionHi?: string;
   earned: boolean;
   earnedAt?: string;
 }
@@ -85,16 +86,16 @@ const RANKS = [
 ];
 
 const DEFAULT_BADGES: Badge[] = [
-  { id: 'hygiene_hero', name: 'Hygiene Hero', nameHi: 'स्वच्छता नायक', icon: '🧼', description: 'Master hand-washing & personal hygiene', earned: false },
-  { id: 'knife_skills', name: 'Knife Skills', nameHi: 'चाकू कौशल', icon: '🔪', description: 'Identify every classical vegetable cut', earned: false },
-  { id: 'safety_first', name: 'Safety First', nameHi: 'सुरक्षा पहले', icon: '🧯', description: 'Complete kitchen safety & first-aid', earned: false },
-  { id: 'master_baker', name: 'Master Baker', nameHi: 'मास्टर बेकर', icon: '🍞', description: 'Complete bakery & dough modules', earned: false },
-  { id: 'storage_pro', name: 'Storage Pro', nameHi: 'भंडारण विशेषज्ञ', icon: '❄️', description: 'Store every food at the right temperature', earned: false },
-  { id: 'plating_artist', name: 'Plating Artist', nameHi: 'प्लेटिंग कलाकार', icon: '🍽️', description: 'Plate a dish with the clock method', earned: false },
-  { id: 'commodity_expert', name: 'Commodity Expert', nameHi: 'सामग्री विशेषज्ञ', icon: '🧺', description: 'Sort all commodities by origin', earned: false },
-  { id: 'quiz_champion', name: 'Quiz Champion', nameHi: 'क्विज़ चैंपियन', icon: '🏆', description: 'Score 100% on any quiz', earned: false },
-  { id: 'streak_7', name: '7-Day Streak', nameHi: '7-दिन की लय', icon: '🔥', description: 'Practise for 7 days in a row', earned: false },
-  { id: 'first_lab', name: 'First Kitchen Lab', nameHi: 'पहली किचन लैब', icon: '🧪', description: 'Complete your first kitchen lab', earned: false },
+  { id: 'hygiene_hero', name: 'Hygiene Hero', nameHi: 'स्वच्छता नायक', icon: '🧼', description: 'Master hand-washing & personal hygiene', descriptionHi: 'हाथ-धुलाई एवं व्यक्तिगत स्वच्छता में निपुणता', earned: false },
+  { id: 'knife_skills', name: 'Knife Skills', nameHi: 'चाकू कौशल', icon: '🔪', description: 'Identify every classical vegetable cut', descriptionHi: 'सभी शास्त्रीय सब्ज़ी कट्स पहचानें', earned: false },
+  { id: 'safety_first', name: 'Safety First', nameHi: 'सुरक्षा पहले', icon: '🧯', description: 'Complete kitchen safety & first-aid', descriptionHi: 'रसोई सुरक्षा एवं प्राथमिक उपचार पूर्ण करें', earned: false },
+  { id: 'master_baker', name: 'Master Baker', nameHi: 'मास्टर बेकर', icon: '🍞', description: 'Complete bakery & dough modules', descriptionHi: 'बेकरी एवं आटा मॉड्यूल पूर्ण करें', earned: false },
+  { id: 'storage_pro', name: 'Storage Pro', nameHi: 'भंडारण विशेषज्ञ', icon: '❄️', description: 'Store every food at the right temperature', descriptionHi: 'हर भोजन को सही तापमान पर भंडारित करें', earned: false },
+  { id: 'plating_artist', name: 'Plating Artist', nameHi: 'प्लेटिंग कलाकार', icon: '🍽️', description: 'Plate a dish with the clock method', descriptionHi: 'क्लॉक विधि से व्यंजन प्लेट करें', earned: false },
+  { id: 'commodity_expert', name: 'Commodity Expert', nameHi: 'सामग्री विशेषज्ञ', icon: '🧺', description: 'Sort all commodities by origin', descriptionHi: 'सभी सामग्री को मूल के अनुसार छांटें', earned: false },
+  { id: 'quiz_champion', name: 'Quiz Champion', nameHi: 'क्विज़ चैंपियन', icon: '🏆', description: 'Score 100% on any quiz', descriptionHi: 'किसी भी क्विज़ में 100% अंक प्राप्त करें', earned: false },
+  { id: 'streak_7', name: '7-Day Streak', nameHi: '7-दिन की लय', icon: '🔥', description: 'Practise for 7 days in a row', descriptionHi: 'लगातार 7 दिन अभ्यास करें', earned: false },
+  { id: 'first_lab', name: 'First Kitchen Lab', nameHi: 'पहली किचन लैब', icon: '🧪', description: 'Complete your first kitchen lab', descriptionHi: 'अपनी पहली किचन लैब पूर्ण करें', earned: false },
 ];
 
 const DEFAULT_OUTCOMES: LearningOutcome[] = [
@@ -147,7 +148,7 @@ export const useAppStore = create<AppState>()(
       toggleSound: () => set((s) => ({ soundEnabled: !s.soundEnabled })),
 
       // Language
-      language: 'en',
+      language: 'hi',
       setLanguage: (lang) => set({ language: lang }),
 
       // Sidebar
@@ -218,6 +219,23 @@ export const useAppStore = create<AppState>()(
     }),
     {
       name: 'foodproduction-skilllab-storage',
+      version: 1,
+      migrate: (persistedState, version) => {
+        if (version < 1 && persistedState && typeof persistedState === 'object') {
+          const state = persistedState as Partial<AppState>;
+          return {
+            ...state,
+            language: 'hi',
+            badges: Array.isArray(state.badges)
+              ? state.badges.map((b) => {
+                  const def = DEFAULT_BADGES.find((d) => d.id === b.id);
+                  return def ? { ...b, descriptionHi: b.descriptionHi || def.descriptionHi } : b;
+                })
+              : DEFAULT_BADGES,
+          };
+        }
+        return persistedState as AppState;
+      },
     }
   )
 );

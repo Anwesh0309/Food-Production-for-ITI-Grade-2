@@ -24,7 +24,7 @@ export default function Labs() {
           </p>
         </div>
         <span className="text-xs font-semibold px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300 self-start sm:self-auto">
-          {FOOD_LABS.length} Labs Available
+          {FOOD_LABS.length} {language === 'hi' ? 'लैब उपलब्ध' : 'Labs Available'}
         </span>
       </div>
 

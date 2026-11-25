@@ -41,7 +41,21 @@ const GLOSSARY: GlossaryTerm[] = [
   { id: 'g24', term: 'CO₂ fire extinguisher', termHi: 'CO₂ अग्निशामक', definition: 'An extinguisher that smothers electrical and oil fires without water; never use water on these fires.', definitionHi: 'अग्निशामक जो बिजली व तेल आग को बिना पानी बुझाता है; इन पर पानी कभी न डालें।', category: 'Safety' },
 ];
 
-const CATEGORIES = ['All', 'Kitchen', 'Uniform', 'Hygiene', 'Commodities', 'Storage', 'Cooking', 'Bakery', 'Equipment', 'Safety', 'Presentation'];
+const CATEGORIES = [
+  { key: 'All', en: 'All', hi: 'सभी' },
+  { key: 'Kitchen', en: 'Kitchen', hi: 'रसोई' },
+  { key: 'Uniform', en: 'Uniform', hi: 'वर्दी' },
+  { key: 'Hygiene', en: 'Hygiene', hi: 'स्वच्छता' },
+  { key: 'Commodities', en: 'Commodities', hi: 'सामग्री' },
+  { key: 'Storage', en: 'Storage', hi: 'भंडारण' },
+  { key: 'Cooking', en: 'Cooking', hi: 'पाक' },
+  { key: 'Bakery', en: 'Bakery', hi: 'बेकरी' },
+  { key: 'Equipment', en: 'Equipment', hi: 'उपकरण' },
+  { key: 'Safety', en: 'Safety', hi: 'सुरक्षा' },
+  { key: 'Presentation', en: 'Presentation', hi: 'प्रस्तुति' },
+];
+
+const CATEGORY_HI: Record<string, string> = Object.fromEntries(CATEGORIES.map((c) => [c.key, c.hi]));
 
 export default function Glossary() {
   const { t } = useTranslation();
@@ -56,7 +70,8 @@ export default function Glossary() {
         !search ||
         term.term.toLowerCase().includes(search.toLowerCase()) ||
         term.termHi.includes(search) ||
-        term.definition.toLowerCase().includes(search.toLowerCase());
+        term.definition.toLowerCase().includes(search.toLowerCase()) ||
+        term.definitionHi.includes(search);
       return matchCategory && matchSearch;
     });
   }, [search, category]);
@@ -82,18 +97,18 @@ export default function Glossary() {
 
         <div className="flex gap-1.5 overflow-x-auto no-scrollbar py-1">
           {CATEGORIES.map((cat) => {
-            const isCat = category === cat;
+            const isCat = category === cat.key;
             return (
               <button
-                key={cat}
-                onClick={() => setCategory(cat)}
+                key={cat.key}
+                onClick={() => setCategory(cat.key)}
                 className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all flex-shrink-0 cursor-pointer shadow-2xs ${
                   isCat
                     ? 'bg-orange-600 text-white shadow-xs'
                     : 'bg-white dark:bg-surface-dark-2 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:border-slate-300'
                 }`}
               >
-                {cat}
+                {language === 'hi' ? cat.hi : cat.en}
               </button>
             );
           })}
@@ -120,7 +135,7 @@ export default function Glossary() {
                   <p className="text-xs sm:text-sm text-orange-600 dark:text-orange-400 font-semibold mt-0.5 truncate">{term.termHi}</p>
                 </div>
                 <span className="text-xs font-bold uppercase tracking-wider bg-slate-100 dark:bg-surface-dark-2 text-slate-600 dark:text-slate-300 px-3 py-1 rounded-full flex-shrink-0 border border-slate-200/60 dark:border-slate-700/60 shadow-2xs">
-                  {term.category}
+                  {language === 'hi' ? (CATEGORY_HI[term.category] || term.category) : term.category}
                 </span>
               </div>
               <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 mt-3 leading-relaxed">

@@ -158,7 +158,7 @@ export function VirtualKitchenSim() {
       {/* Balanced Stat Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
         <FoodStat label={L('Placed', 'रखा')} value={`${Object.keys(placed).length}/${ROOMS.length}`} color={T.accent} />
-        <FoodStat label={L('Sections', 'अनुभाग')} value={`${ROOMS.length} zones`} color="#64748b" />
+        <FoodStat label={L('Sections', 'अनुभाग')} value={`${ROOMS.length} ${L('zones', 'ज़ोन')}`} color="#64748b" />
         <div className="col-span-2 sm:col-span-1">
           <FoodStat
             label={L('Accuracy', 'सटीकता')}

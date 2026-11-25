@@ -116,7 +116,7 @@ export default function TopBar() {
           onClick={toggleTheme}
           className="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-surface-dark-2 transition-colors cursor-pointer"
           aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
-          title={theme === 'light' ? 'Dark mode' : 'Light mode'}
+          title={theme === 'light' ? (language === 'hi' ? 'डार्क मोड' : 'Dark mode') : (language === 'hi' ? 'लाइट मोड' : 'Light mode')}
         >
           {theme === 'light' ? (
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -197,10 +197,10 @@ export default function TopBar() {
                         className="text-xs px-2 py-1 rounded border border-orange-400 bg-white dark:bg-surface-dark-2 text-slate-800 dark:text-slate-100 w-full focus:outline-none"
                         autoFocus
                       />
-                      <button onClick={saveName} className="p-1 text-green-600 hover:bg-green-50 rounded" title="Save">
+                      <button onClick={saveName} className="p-1 text-green-600 hover:bg-green-50 rounded" title={language === 'hi' ? 'सहेजें' : 'Save'}>
                         <Check size={14} />
                       </button>
-                      <button onClick={() => setIsEditingName(false)} className="p-1 text-slate-400 hover:bg-slate-100 rounded" title="Cancel">
+                      <button onClick={() => setIsEditingName(false)} className="p-1 text-slate-400 hover:bg-slate-100 rounded" title={language === 'hi' ? 'रद्द करें' : 'Cancel'}>
                         <X size={14} />
                       </button>
                     </div>
@@ -236,7 +236,9 @@ export default function TopBar() {
                   <p className="text-[9px] uppercase tracking-wider text-slate-500 dark:text-slate-400 mt-1 font-semibold">XP</p>
                 </div>
                 <div className="bg-slate-50 dark:bg-surface-dark-2 rounded-xl p-2 border border-slate-100 dark:border-slate-800">
-                  <p className="text-sm font-bold text-orange-600 font-mono leading-none">{streak}d</p>
+                  <p className="text-sm font-bold text-orange-600 font-mono leading-none">
+                    {streak}{language === 'hi' ? ' दिन' : 'd'}
+                  </p>
                   <p className="text-[9px] uppercase tracking-wider text-slate-500 dark:text-slate-400 mt-1 font-semibold">{language === 'hi' ? 'लय' : 'Streak'}</p>
                 </div>
                 <div className="bg-slate-50 dark:bg-surface-dark-2 rounded-xl p-2 border border-slate-100 dark:border-slate-800">
@@ -263,7 +265,7 @@ export default function TopBar() {
                     <Award size={15} className="text-orange-500" />
                     <span>{language === 'hi' ? 'कैरियर सीढ़ी व बैज' : 'Career Ladder & Badges'}</span>
                   </span>
-                  <span className="text-[10px] font-bold font-mono text-slate-400">{rank}</span>
+                  <span className="text-[10px] font-bold font-mono text-slate-400">{language === 'hi' ? rankHi : rank}</span>
                 </Link>
                 <Link
                   to="/missions"
@@ -274,7 +276,7 @@ export default function TopBar() {
                     <Target size={15} className="text-amber-500" />
                     <span>{language === 'hi' ? 'व्यापार मिशन व दक्षताएं' : 'Trade Missions & Competencies'}</span>
                   </span>
-                  <span className="text-[10px] font-bold text-amber-600">8 Missions</span>
+                  <span className="text-[10px] font-bold text-amber-600">{language === 'hi' ? '8 मिशन' : '8 Missions'}</span>
                 </Link>
                 <Link
                   to="/labs"
@@ -285,7 +287,7 @@ export default function TopBar() {
                     <FlaskConical size={15} className="text-blue-500" />
                     <span>{language === 'hi' ? 'किचन सिमुलेशन लैब्स' : 'Virtual Kitchen Labs'}</span>
                   </span>
-                  <span className="text-[10px] font-bold text-blue-600">13 Labs</span>
+                  <span className="text-[10px] font-bold text-blue-600">{language === 'hi' ? '13 लैब' : '13 Labs'}</span>
                 </Link>
                 <Link
                   to="/assessments"
@@ -296,7 +298,7 @@ export default function TopBar() {
                     <Zap size={15} className="text-purple-500" />
                     <span>{language === 'hi' ? 'व्यापार ज्ञान परीक्षा' : 'Trade Assessments (50 Qs)'}</span>
                   </span>
-                  <span className="text-[10px] font-bold text-purple-600">50 Qs</span>
+                  <span className="text-[10px] font-bold text-purple-600">{language === 'hi' ? '50 प्रश्न' : '50 Qs'}</span>
                 </Link>
               </div>
 

@@ -46,7 +46,9 @@ export default function Progress() {
             <h2 className="text-xl sm:text-2xl font-bold mt-1 truncate">
               {currentRank.icon} {language === 'hi' ? currentRank.nameHi : currentRank.name}
             </h2>
-            <p className="text-xs sm:text-sm mt-1.5 text-white/90 font-mono font-medium">Level {level} • {xp} XP</p>
+            <p className="text-xs sm:text-sm mt-1.5 text-white/90 font-mono font-medium">
+              {language === 'hi' ? `स्तर ${level} • ${xp} XP` : `Level ${level} • ${xp} XP`}
+            </p>
           </div>
           <div className="text-4xl sm:text-6xl opacity-35 flex-shrink-0 select-none">{currentRank.icon}</div>
         </div>
@@ -145,7 +147,9 @@ export default function Progress() {
               <span className="text-2xl flex-shrink-0">{badge.icon}</span>
               <div className="min-w-0 flex-1">
                 <p className="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 truncate">{language === 'hi' ? badge.nameHi : badge.name}</p>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-1">{badge.description}</p>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-1">
+                  {language === 'hi' ? (badge.descriptionHi || badge.description) : badge.description}
+                </p>
                 {badge.earned && <p className="text-[10px] text-green-600 dark:text-green-400 font-semibold mt-1">✓ {language === 'hi' ? 'अर्जित' : 'Unlocked'}</p>}
               </div>
             </div>

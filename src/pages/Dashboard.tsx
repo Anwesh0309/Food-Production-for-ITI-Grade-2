@@ -25,7 +25,7 @@ function StatCard({ icon, label, value, color }: { icon: string; label: string; 
 
 export default function Dashboard() {
   const { t } = useTranslation();
-  const { xp, labAttempts, streak, rank, rankHi, language, outcomes, completedLessons, badges } = useAppStore();
+  const { xp, labAttempts, streak, rank, rankHi, language, outcomes, completedLessons, badges, userName } = useAppStore();
   const completedOutcomes = outcomes.filter((o) => o.status === 'completed').length;
   const earnedBadges = badges.filter((b) => b.earned).length;
   const total = outcomes.length || 1;
@@ -43,7 +43,7 @@ export default function Dashboard() {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div className="min-w-0">
             <h1 className="text-xl sm:text-2xl font-bold leading-tight">
-              {t('dashboard.welcome')}, Trainee! 👨‍🍳
+              {t('dashboard.welcome')}, {userName === 'Trainee' && language === 'hi' ? 'प्रशिक्षु' : userName}! 👨‍🍳
             </h1>
             <p className="text-orange-100 mt-1 text-xs sm:text-sm leading-relaxed max-w-xl">
               {language === 'hi'
@@ -76,7 +76,7 @@ export default function Dashboard() {
           <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-100 dark:border-slate-800">
             <h2 className="font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100">{t('dashboard.overallProgress')}</h2>
             <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-orange-100 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300">
-              {progressPercent}% Complete
+              {progressPercent}% {language === 'hi' ? 'पूर्ण' : 'Complete'}
             </span>
           </div>
 
@@ -205,7 +205,9 @@ export default function Dashboard() {
                   {language === 'hi' ? badge.nameHi : badge.name}
                 </p>
                 <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5">
-                  {badge.earned ? (language === 'hi' ? '✓ अर्जित' : '✓ Unlocked') : badge.description}
+                  {badge.earned
+                    ? (language === 'hi' ? '✓ अर्जित' : '✓ Unlocked')
+                    : (language === 'hi' ? (badge.descriptionHi || badge.description) : badge.description)}
                 </p>
               </div>
             </div>

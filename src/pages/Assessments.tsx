@@ -5,6 +5,21 @@ import { Check, X } from 'lucide-react';
 import { QUESTION_BANK, type Question } from '@/data/assessmentQuestions';
 import { playTouchSound } from '@/utils/sound';
 
+const TOPIC_HI: Record<string, string> = {
+  Bakery: 'बेकरी',
+  Commodities: 'सामग्री',
+  Cooking: 'पाक विधि',
+  Cuts: 'सब्ज़ी कट्स',
+  Equipment: 'उपकरण',
+  Hygiene: 'स्वच्छता',
+  Kitchen: 'रसोई',
+  Presentation: 'प्रस्तुति',
+  Safety: 'सुरक्षा',
+  Sauces: 'सॉस',
+  Storage: 'भंडारण',
+  Uniform: 'वर्दी',
+};
+
 export default function Assessments() {
   const { t } = useTranslation();
   const { language, addXP, earnBadge } = useAppStore();
@@ -161,9 +176,13 @@ export default function Assessments() {
             question.difficulty === 'medium' ? 'bg-amber-100 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300' :
             'bg-red-100 dark:bg-red-950/40 text-red-700 dark:text-red-300'
           }`}>
-            {question.difficulty}
+            {language === 'hi'
+              ? (question.difficulty === 'easy' ? 'आसान' : question.difficulty === 'medium' ? 'मध्यम' : 'कठिन')
+              : question.difficulty}
           </span>
-          <span className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-semibold">{question.topic}</span>
+          <span className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-semibold">
+            {language === 'hi' ? (TOPIC_HI[question.topic] || question.topic) : question.topic}
+          </span>
         </div>
 
         <h2 className="text-lg sm:text-xl font-bold mb-5 text-slate-900 dark:text-white leading-snug">
