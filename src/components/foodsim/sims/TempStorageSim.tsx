@@ -3,6 +3,7 @@ import { CheckCircle2, RotateCcw, Snowflake, Refrigerator, Thermometer } from 'l
 import { FoodShell, FoodStat, useLang } from '../foodPrimitives';
 import { FOOD_THEMES } from '../foodTheme';
 import { useAppStore } from '@/context/store';
+import { playTouchSound } from '@/utils/sound';
 
 const T = FOOD_THEMES.storage;
 
@@ -43,6 +44,7 @@ export function TempStorageSim() {
       setSel(null);
       setActiveZone(null);
       setChecked(false);
+      playTouchSound('pop');
       return;
     }
 
@@ -57,6 +59,7 @@ export function TempStorageSim() {
       setActiveZone(null);
       setSel(null);
       setChecked(false);
+      playTouchSound('pop');
       return;
     }
 
@@ -191,7 +194,7 @@ export function TempStorageSim() {
       </div>
 
       <div className="flex items-center gap-2">
-        <button disabled={unplaced.length > 0} onClick={() => setChecked(true)}
+        <button disabled={unplaced.length > 0} onClick={() => { setChecked(true); playTouchSound(correct === FOODS.length ? 'success' : 'error'); }}
           className="px-5 py-2.5 rounded-xl text-sm sm:text-base font-bold text-white disabled:opacity-40 cursor-pointer shadow-sm transition-all" style={{ background: T.accent }}>
           {L('Check storage', 'भंडारण जांचें')}
         </button>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { TriangleAlert, CheckCircle2, RotateCcw } from 'lucide-react';
 import { FoodShell, FoodProgress, useLang } from '../foodPrimitives';
 import { FOOD_THEMES } from '../foodTheme';
+import { playTouchSound } from '@/utils/sound';
 
 const T = FOOD_THEMES.safety;
 interface Spot {
@@ -48,7 +49,17 @@ export function FoodSafetySim() {
   const [found, setFound] = useState<Set<string>>(new Set());
   const [misses, setMisses] = useState(0);
   const [active, setActive] = useState<Spot | null>(null);
-  const click = (s: Spot) => { setActive(s); if (s.hazard && !found.has(s.id)) setFound(new Set(found).add(s.id)); else if (!s.hazard) setMisses((m) => m + 1); };
+  const click = (s: Spot) => {
+    setActive(s);
+    if (s.hazard && !found.has(s.id)) {
+      const nextFound = new Set(found).add(s.id);
+      setFound(nextFound);
+      playTouchSound(nextFound.size === TOTAL ? 'success' : 'pop');
+    } else if (!s.hazard) {
+      setMisses((m) => m + 1);
+      playTouchSound('error');
+    }
+  };
   const done = found.size === TOTAL;
 
   return (

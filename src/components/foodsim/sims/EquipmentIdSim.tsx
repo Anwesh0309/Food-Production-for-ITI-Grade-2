@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import { Check, X, ArrowRight } from 'lucide-react';
 import { FoodShell, FoodStat, useLang } from '../foodPrimitives';
 import { FOOD_THEMES } from '../foodTheme';
+import { playTouchSound } from '@/utils/sound';
 
 const T = FOOD_THEMES.equipment;
 interface Q { tool: { en: string; hi: string }; use: { en: string; hi: string }; wrong: { en: string; hi: string }[] }
@@ -21,7 +22,14 @@ export function EquipmentIdSim() {
   const [score, setScore] = useState(0); const [asked, setAsked] = useState(0);
   const q = TOOLS[idx % TOOLS.length];
   const options = useMemo(() => [q.use, ...q.wrong].sort(() => Math.random() - 0.5), [idx]);
-  const choose = (en: string) => { if (picked) return; setPicked(en); setAsked((a) => a + 1); if (en === q.use.en) setScore((s) => s + 1); };
+  const choose = (en: string) => {
+    if (picked) return;
+    setPicked(en);
+    setAsked((a) => a + 1);
+    const correct = en === q.use.en;
+    playTouchSound(correct ? 'success' : 'error');
+    if (correct) setScore((s) => s + 1);
+  };
   const next = () => { setPicked(null); setIdx((i) => i + 1); };
 
   return (

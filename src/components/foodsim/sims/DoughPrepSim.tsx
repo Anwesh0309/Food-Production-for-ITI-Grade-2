@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { CheckCircle2, RotateCcw, X, Timer } from 'lucide-react';
 import { FoodShell, FoodSlider, FoodStat, useLang } from '../foodPrimitives';
 import { FOOD_THEMES } from '../foodTheme';
+import { playTouchSound } from '@/utils/sound';
 
 const T = FOOD_THEMES.dough;
 
@@ -49,8 +50,15 @@ export function DoughPrepSim() {
   const kneaded = ordered.length === STEPS.length;
   const nextExpected = ordered.length + 1;
   const pick = (s: Step) => {
-    if (s.id === nextExpected) setOrdered((o) => [...o, s.id]);
-    else { setWrongId(s.id); setTimeout(() => setWrongId(null), 600); }
+    if (s.id === nextExpected) {
+      const isDone = ordered.length + 1 === STEPS.length;
+      setOrdered((o) => [...o, s.id]);
+      playTouchSound(isDone ? 'success' : 'pop');
+    } else {
+      setWrongId(s.id);
+      playTouchSound('error');
+      setTimeout(() => setWrongId(null), 600);
+    }
   };
 
   // proving sweet-spot 55–95 min

@@ -3,6 +3,7 @@ import { CheckCircle2, RotateCcw, Sparkles } from 'lucide-react';
 import { FoodShell, FoodStat, useLang } from '../foodPrimitives';
 import { FOOD_THEMES } from '../foodTheme';
 import { useAppStore } from '@/context/store';
+import { playTouchSound } from '@/utils/sound';
 
 const T = FOOD_THEMES.plating;
 
@@ -30,7 +31,11 @@ export function PlatingStudioSim() {
   const [sel, setSel] = useState<string>('protein');
   const [checked, setChecked] = useState(false);
 
-  const placeAt = (hour: number) => { setPlaced((p) => ({ ...p, [sel]: hour })); setChecked(false); };
+  const placeAt = (hour: number) => {
+    setPlaced((p) => ({ ...p, [sel]: hour }));
+    setChecked(false);
+    playTouchSound('pop');
+  };
   const removeComp = (id: string, e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
     setPlaced((p) => {
@@ -153,7 +158,7 @@ export function PlatingStudioSim() {
       </div>
 
       <div className="flex items-center gap-2">
-        <button disabled={!allPlaced} onClick={() => setChecked(true)}
+        <button disabled={!allPlaced} onClick={() => { setChecked(true); playTouchSound(pct >= 70 ? 'success' : 'error'); }}
           className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold text-white disabled:opacity-40" style={{ background: T.accent }}>
           <Sparkles size={14} /> {L('Rate my plate', 'मेरी प्लेट रेट करें')}
         </button>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Check, X, ArrowRight } from 'lucide-react';
 import { FoodShell, FoodStat, useLang } from '../foodPrimitives';
 import { FOOD_THEMES } from '../foodTheme';
+import { playTouchSound } from '@/utils/sound';
 
 const T = FOOD_THEMES.commodity;
 const GROUPS = [
@@ -28,7 +29,14 @@ export function IngredientIdSim() {
   const [picked, setPicked] = useState<string | null>(null);
   const [score, setScore] = useState(0); const [asked, setAsked] = useState(0);
   const item = ITEMS[idx % ITEMS.length];
-  const choose = (g: string) => { if (picked) return; setPicked(g); setAsked((a) => a + 1); if (g === item.group) setScore((s) => s + 1); };
+  const choose = (g: string) => {
+    if (picked) return;
+    setPicked(g);
+    setAsked((a) => a + 1);
+    const correct = g === item.group;
+    playTouchSound(correct ? 'success' : 'error');
+    if (correct) setScore((s) => s + 1);
+  };
   const next = () => { setPicked(null); setIdx((i) => i + 1); };
 
   return (

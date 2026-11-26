@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { CheckCircle2, XCircle, ArrowRight } from 'lucide-react';
 import { FoodShell, FoodStat, useLang } from '../foodPrimitives';
 import { FOOD_THEMES } from '../foodTheme';
+import { playTouchSound } from '@/utils/sound';
 
 const T = FOOD_THEMES.cooking;
 interface Dish { en: string; hi: string; best: string[]; outcomes: Record<string, { ok: boolean; en: string; hi: string }> }
@@ -38,7 +39,14 @@ export function CookingMethodsSim() {
   const dish = DISHES[idx % DISHES.length];
   const outcome = picked ? (dish.outcomes[picked] ?? { ok: false, en: 'Not an ideal choice for this dish.', hi: 'इस व्यंजन हेतु आदर्श नहीं।' }) : null;
 
-  const pick = (m: string) => { if (picked) return; setPicked(m); setAsked((a) => a + 1); if (dish.best.includes(m)) setScore((s) => s + 1); };
+  const pick = (m: string) => {
+    if (picked) return;
+    setPicked(m);
+    setAsked((a) => a + 1);
+    const isBest = dish.best.includes(m);
+    playTouchSound(isBest ? 'success' : 'error');
+    if (isBest) setScore((s) => s + 1);
+  };
   const next = () => { setPicked(null); setIdx((i) => i + 1); };
 
   return (

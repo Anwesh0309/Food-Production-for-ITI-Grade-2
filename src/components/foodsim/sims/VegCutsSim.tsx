@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import { Check, X, ArrowRight } from 'lucide-react';
 import { FoodShell, FoodStat, useLang } from '../foodPrimitives';
 import { FOOD_THEMES } from '../foodTheme';
+import { playTouchSound } from '@/utils/sound';
 
 const T = FOOD_THEMES.cuts;
 const VEG = '#f59e0b';
@@ -28,7 +29,14 @@ export function VegCutsSim() {
     const wrong = CUTS.filter((c) => c.id !== cut.id).sort(() => Math.random() - 0.5).slice(0, 3);
     return [...wrong, cut].sort(() => Math.random() - 0.5);
   }, [cut]);
-  const choose = (id: string) => { if (picked) return; setPicked(id); setAsked((a) => a + 1); if (id === cut.id) setScore((s) => s + 1); };
+  const choose = (id: string) => {
+    if (picked) return;
+    setPicked(id);
+    setAsked((a) => a + 1);
+    const correct = id === cut.id;
+    playTouchSound(correct ? 'success' : 'error');
+    if (correct) setScore((s) => s + 1);
+  };
   const next = () => { setPicked(null); setIdx((i) => i + 1); };
 
   return (

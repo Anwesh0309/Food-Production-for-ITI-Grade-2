@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { CheckCircle2, RotateCcw, Droplets, X } from 'lucide-react';
 import { FoodShell, FoodStat, useLang } from '../foodPrimitives';
 import { FOOD_THEMES } from '../foodTheme';
+import { playTouchSound } from '@/utils/sound';
 
 const T = FOOD_THEMES.hygiene;
 
@@ -33,8 +34,17 @@ export function KitchenHygieneSim() {
   const nextExpected = ordered.length + 1; // ids are 1..7 in order
   const pick = (s: Step) => {
     if (ordered.includes(s.id)) return;
-    if (s.id === nextExpected) { setOrdered((o) => [...o, s.id]); setWrongId(null); }
-    else { setWrongId(s.id); setMistakes((m) => m + 1); setTimeout(() => setWrongId(null), 600); }
+    if (s.id === nextExpected) {
+      const isDone = ordered.length + 1 === STEPS.length;
+      setOrdered((o) => [...o, s.id]);
+      setWrongId(null);
+      playTouchSound(isDone ? 'success' : 'pop');
+    } else {
+      setWrongId(s.id);
+      setMistakes((m) => m + 1);
+      playTouchSound('error');
+      setTimeout(() => setWrongId(null), 600);
+    }
   };
   const germs = Math.max(0, 100 - Math.round((ordered.length / STEPS.length) * 100));
   const done = ordered.length === STEPS.length;

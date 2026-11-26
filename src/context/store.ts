@@ -1,6 +1,17 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+export const MANUAL_LANG_KEY = 'foodproduction:manual-lang';
+
+export function getInitialLanguage(): 'en' | 'hi' {
+  if (typeof window === 'undefined') return 'hi';
+  try {
+    const manual = sessionStorage.getItem(MANUAL_LANG_KEY);
+    if (manual === 'en' || manual === 'hi') return manual;
+  } catch {}
+  return 'hi';
+}
+
 export interface Badge {
   id: string;
   name: string;
@@ -148,8 +159,15 @@ export const useAppStore = create<AppState>()(
       toggleSound: () => set((s) => ({ soundEnabled: !s.soundEnabled })),
 
       // Language
-      language: 'hi',
-      setLanguage: (lang) => set({ language: lang }),
+      language: getInitialLanguage(),
+      setLanguage: (lang) => {
+        try {
+          if (typeof window !== 'undefined') {
+            sessionStorage.setItem(MANUAL_LANG_KEY, lang);
+          }
+        } catch {}
+        set({ language: lang });
+      },
 
       // Sidebar
       sidebarOpen: true,
@@ -203,8 +221,14 @@ export const useAppStore = create<AppState>()(
         })),
 
       // Reset
-      resetProgress: () =>
+      resetProgress: () => {
+        try {
+          if (typeof window !== 'undefined') {
+            sessionStorage.removeItem(MANUAL_LANG_KEY);
+          }
+        } catch {}
         set({
+          language: 'hi',
           xp: 0,
           level: 1,
           streak: 0,
@@ -215,11 +239,17 @@ export const useAppStore = create<AppState>()(
           labAttempts: [],
           completedQuizzes: [],
           outcomes: DEFAULT_OUTCOMES,
-        }),
+        });
+      },
     }),
     {
       name: 'foodproduction-skilllab-storage',
       version: 1,
+      onRehydrateStorage: () => (state) => {
+        if (state) {
+          state.language = getInitialLanguage();
+        }
+      },
       migrate: (persistedState, version) => {
         if (version < 1 && persistedState && typeof persistedState === 'object') {
           const state = persistedState as Partial<AppState>;

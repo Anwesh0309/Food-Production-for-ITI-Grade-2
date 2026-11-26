@@ -206,9 +206,13 @@ const resources = {
   },
 };
 
+const initialLang = typeof window !== 'undefined'
+  ? (sessionStorage.getItem('foodproduction:manual-lang') === 'en' ? 'en' : 'hi')
+  : 'hi';
+
 i18n.use(initReactI18next).init({
   resources,
-  lng: 'hi',
+  lng: initialLang,
   fallbackLng: 'en',
   interpolation: {
     escapeValue: false,

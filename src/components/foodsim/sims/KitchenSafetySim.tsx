@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { CheckCircle2, RotateCcw, ArrowRight, Siren, X } from 'lucide-react';
 import { FoodShell, FoodStat, useLang } from '../foodPrimitives';
 import { FOOD_THEMES } from '../foodTheme';
+import { playTouchSound } from '@/utils/sound';
 
 const T = FOOD_THEMES.firstaid;
 
@@ -32,7 +33,14 @@ export function KitchenSafetySim() {
   const [answered, setAnswered] = useState(0);
 
   const s = SCN[idx];
-  const choose = (i: number) => { if (pick !== null) return; setPick(i); if (i === s.correct) setScore((v) => v + 1); setAnswered((a) => a + 1); };
+  const choose = (i: number) => {
+    if (pick !== null) return;
+    setPick(i);
+    const correct = i === s.correct;
+    playTouchSound(correct ? 'success' : 'error');
+    if (correct) setScore((v) => v + 1);
+    setAnswered((a) => a + 1);
+  };
   const next = () => { setIdx((i) => (i + 1) % SCN.length); setPick(null); };
   const reset = () => { setIdx(0); setPick(null); setScore(0); setAnswered(0); };
   const allDone = answered >= SCN.length;

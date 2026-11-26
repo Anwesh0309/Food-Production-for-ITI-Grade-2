@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { CheckCircle2, RotateCcw, Shirt } from 'lucide-react';
 import { FoodShell, FoodProgress, useLang } from '../foodPrimitives';
 import { FOOD_THEMES } from '../foodTheme';
+import { playTouchSound } from '@/utils/sound';
 
 const T = FOOD_THEMES.uniform;
 
@@ -29,7 +30,18 @@ export function ChefUniformSim() {
   const [active, setActive] = useState<Part | null>(null);
   const toggle = (p: Part) => {
     setActive(p);
-    setWorn((w) => { const n = new Set(w); n.has(p.id) ? n.delete(p.id) : n.add(p.id); return n; });
+    setWorn((w) => {
+      const n = new Set(w);
+      const willAdd = !n.has(p.id);
+      if (willAdd) {
+        n.add(p.id);
+        playTouchSound(n.size === PARTS.length ? 'success' : 'pop');
+      } else {
+        n.delete(p.id);
+        playTouchSound('tap');
+      }
+      return n;
+    });
   };
   const has = (id: string) => worn.has(id);
   const done = worn.size === PARTS.length;

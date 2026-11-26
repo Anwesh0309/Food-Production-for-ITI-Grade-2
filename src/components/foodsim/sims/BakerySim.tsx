@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { CheckCircle2, RotateCcw, ArrowRight, Flame } from 'lucide-react';
 import { FoodShell, FoodStat, useLang } from '../foodPrimitives';
 import { FOOD_THEMES } from '../foodTheme';
+import { playTouchSound } from '@/utils/sound';
 
 const T = FOOD_THEMES.bakery;
 
@@ -35,7 +36,9 @@ export function BakerySim() {
   const choose = (b: number) => {
     if (choice !== null) return;
     setChoice(b);
-    if (b === item.band) setScore((s) => s + 1);
+    const isCorrect = b === item.band;
+    playTouchSound(isCorrect ? 'success' : 'error');
+    if (isCorrect) setScore((s) => s + 1);
     setDoneCount((d) => d + 1);
   };
   const next = () => { setIdx((i) => (i + 1) % ITEMS.length); setChoice(null); };
